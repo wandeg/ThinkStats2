@@ -21,7 +21,8 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+
+    return sorted(hist.Items(), key=itemgetter(1))[-1][0]
 
 
 def AllModes(hist):
@@ -31,8 +32,17 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+    return [i for i in sorted(hist.Items(), key=itemgetter(1), reverse=True)]
 
+
+def CohenEffectSize(group1, group2):
+    diff = group1.mean() - group2.mean()
+    var = group1.var()
+    var2 = group2.var()
+    n1, n2 = len(group1), len(group2)
+    pooled_var = (n1*var + n2*var) /(n1+n2)
+    d = diff/math.sqrt(pooled_var)
+    return d
 
 def main(script):
     """Tests the functions in this module.
@@ -49,6 +59,7 @@ def main(script):
 
     # test AllModes
     modes = AllModes(hist)
+
     assert(modes[0][1] == 4693)
 
     for value, freq in modes[:5]:

@@ -71,6 +71,7 @@ def main(script):
     resp = ReadFemResp()
 
     assert(len(resp) == 7643)
+    print(resp.pregnum.value_counts())
     assert(resp.pregnum.value_counts()[1] == 1267)
     assert(ValidatePregnum(resp))
 

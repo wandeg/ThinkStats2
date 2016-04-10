@@ -76,7 +76,8 @@ def main(script):
     hist = thinkstats2.Hist(live.prglngth)
 
     # explore the weight difference between first babies and others
-    WeightDifference(live, firsts, others)
+    print(WeightDifference(live, firsts, others))
+
 
     # test Mode    
     mode = Mode(hist)
